@@ -1,0 +1,54 @@
+#calculator {
+  width: 90vw;
+  max-width: 350px;
+  height: 400px;
+  padding: 10px;
+  border: 1px solid black;
+  background-color: rgb(30, 30, 30);
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 10px;
+}
+#calculator #display {
+  width: 100%;
+  height: 80px;
+  border: 1px solid rgb(108, 108, 108);
+}
+#calculator #buttons-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+#calculator #buttons-container #buttons-row {
+  width: 100%;
+  display: flex;
+  flex-flow: row mowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+#calculator #buttons-container #buttons-row button {
+  flex: 1;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(67, 67, 67);
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+}
+#calculator #buttons-container #buttons-row #equals {
+  flex: 49%;
+}
+#calculator #buttons-container #buttons-row #zero {
+  flex: 24%;
+}
+#calculator #buttons-container #buttons-row #decimal {
+  flex: 24%;
+}/*# sourceMappingURL=App.css.map */

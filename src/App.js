@@ -3,7 +3,8 @@ import * as components from './components/export'
 
 function App() {
   return (
-    <div>
+    <div id="calculator">
+      <components.Display />
       <components.Buttons />
     </div>
   );
