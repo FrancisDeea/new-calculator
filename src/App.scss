@@ -33,6 +33,17 @@
         width: 100%;
         height: 80px;
         border: 1px solid rgb(108, 108, 108);
+        position: relative;
+
+        #output {
+            display: block;
+            color: white;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin: 0 10px 5px 0;
+            font-size: 1.5rem;
+        }
     }
 
     #buttons-container {

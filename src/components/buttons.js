@@ -2,7 +2,7 @@ export const Buttons = (props) => {
     return (
         <div id="buttons-container">
             <div id="buttons-row">
-                <button onClick={props.handleClick} id="clear">AC</button>
+                <button onClick={props.handleClear} id="clear">AC</button>
                 <button onClick={props.handleClick} id="divide">/</button>
             </div>
             <div id="buttons-row">

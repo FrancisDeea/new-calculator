@@ -1,7 +1,7 @@
 export const Display = (props) => {
     return (
         <div id="display">
-            test
+            <span id="output">{props.output}</span>
         </div>
     )
 }
