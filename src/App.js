@@ -6,8 +6,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      input: null,
-      output: 0
+      formula: null,
+      input: 0,
+      output: null
     }
     this.clear = this.clear.bind(this);
   }
@@ -18,12 +19,14 @@ class App extends React.Component {
       input: null,
       output: 0
     })
+
+    
   }
 
   render() {
     return (
       <div id="calculator">
-        <components.Display output={this.state.output} />
+        <components.Display output={this.state.output ? this.state.output : this.state.input} />
         <components.Buttons  handleClear={this.clear} />
       </div>
     )
