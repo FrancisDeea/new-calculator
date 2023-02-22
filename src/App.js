@@ -11,6 +11,7 @@ class App extends React.Component {
       output: null
     }
     this.clear = this.clear.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   // Add methods here
@@ -19,15 +20,17 @@ class App extends React.Component {
       input: null,
       output: 0
     })
+  }
 
-    
+  handleClick(e) {
+    console.log(e.target.value)
   }
 
   render() {
     return (
       <div id="calculator">
         <components.Display output={this.state.output ? this.state.output : this.state.input} />
-        <components.Buttons  handleClear={this.clear} />
+        <components.Buttons  handleClear={this.clear} handleClick={this.handleClick} />
       </div>
     )
   }
