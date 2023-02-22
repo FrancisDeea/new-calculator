@@ -18,7 +18,7 @@
   border: 1px solid rgb(108, 108, 108);
   position: relative;
 }
-#calculator #display #output {
+#calculator #display #output, #calculator #display #formula {
   display: block;
   color: white;
   position: absolute;
@@ -26,6 +26,11 @@
   bottom: 0;
   margin: 0 10px 5px 0;
   font-size: 1.5rem;
+}
+#calculator #display #formula {
+  top: 0;
+  font-size: 1.1rem;
+  margin: 5px 10px 0 0;
 }
 #calculator #buttons-container {
   width: 100%;
