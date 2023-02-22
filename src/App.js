@@ -11,26 +11,35 @@ class App extends React.Component {
       output: null
     }
     this.clear = this.clear.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleNumber = this.handleNumber.bind(this);
   }
 
   // Add methods here
   clear() {
     this.setState({
-      input: null,
-      output: 0
+      input: 0,
+      output: null
     })
   }
 
-  handleClick(e) {
-    console.log(e.target.value)
+  handleNumber(e) {
+    const value = e.target.value;
+    if (this.state.input === 0 | this.state.input === "0") {
+      this.setState({
+        input: value
+      })
+    } else {
+      this.setState(state => ({
+        input: state.input + value
+      }))
+    }
   }
 
   render() {
     return (
       <div id="calculator">
         <components.Display output={this.state.output ? this.state.output : this.state.input} />
-        <components.Buttons  handleClear={this.clear} handleClick={this.handleClick} />
+        <components.Buttons  handleClear={this.clear} handleNumber={this.handleNumber} />
       </div>
     )
   }
