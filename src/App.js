@@ -13,6 +13,7 @@ class App extends React.Component {
     this.clear = this.clear.bind(this);
     this.handleNumber = this.handleNumber.bind(this);
     this.handleSymbol = this.handleSymbol.bind(this);
+    this.handleNegative = this.handleNegative.bind(this);
   }
 
   // Add methods here
@@ -46,14 +47,14 @@ class App extends React.Component {
   handleSymbol(e) {
     const value = e.target.value;
     const formula = this.state.formula;
-    const regex = /\+|-|x|\//;
+    const regex = /^\+$|^-$|^x$|^\/$/;
 
     if (formula === null) {
       this.setState(state => ({
         formula: state.input,
         input: value
       }))
-    } else if (regex.test(this.state.input)) {
+    } else if (this.state.input.match(regex)) {
       this.setState({
         input: value
       })
@@ -64,6 +65,15 @@ class App extends React.Component {
       }))
     }
   }
+
+  handleNegative() {
+    if (/[0-9]+/.test(this.state.input)) {
+      this.setState(state => ({
+        input: (-state.input).toString()
+      }))
+    }
+  }
+
 
   render() {
     return (
@@ -76,6 +86,7 @@ class App extends React.Component {
           handleClear={this.clear}
           handleNumber={this.handleNumber}
           handleSymbol={this.handleSymbol}
+          handleNegative={this.handleNegative}
         />
       </div>
     )

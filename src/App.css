@@ -59,11 +59,6 @@
   font-weight: 500;
 }
 #calculator #buttons-container #buttons-row #equals {
-  flex: 49%;
-}
-#calculator #buttons-container #buttons-row #zero {
-  flex: 24%;
-}
-#calculator #buttons-container #buttons-row #decimal {
-  flex: 24%;
+  background-color: aquamarine;
+  color: black;
 }/*# sourceMappingURL=App.css.map */
