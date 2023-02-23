@@ -14,25 +14,27 @@ class App extends React.Component {
     this.handleNumber = this.handleNumber.bind(this);
     this.handleSymbol = this.handleSymbol.bind(this);
     this.handleNegative = this.handleNegative.bind(this);
+    this.handleDecimal = this.handleDecimal.bind(this);
   }
 
   // Add methods here
   clear() {
     this.setState({
       formula: null,
-      input: 0,
+      input: "0",
       output: null
     })
   }
 
   handleNumber(e) {
-    const regex = /\+|-|x|\//;
+    const regex = /\+|x|\//;
     const value = e.target.value;
+    const input = this.state.input;
     if (this.state.input === 0 | this.state.input === "0") {
       this.setState({
         input: value
       })
-    } else if (regex.test(this.state.input)) {
+    } else if (regex.test(input) || input === "-") {
       this.setState(state => ({
         formula: state.formula + state.input,
         input: value
@@ -74,6 +76,14 @@ class App extends React.Component {
     }
   }
 
+  handleDecimal() {
+    const input = this.state.input;
+    if (!input.includes(".")) {
+      this.setState(state => ({
+        input: state.input + "."
+      }))
+    }
+  }
 
   render() {
     return (
@@ -87,6 +97,7 @@ class App extends React.Component {
           handleNumber={this.handleNumber}
           handleSymbol={this.handleSymbol}
           handleNegative={this.handleNegative}
+          handleDecimal={this.handleDecimal}
         />
       </div>
     )

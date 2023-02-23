@@ -25,7 +25,7 @@ export const Buttons = (props) => {
             </div>
             <div id="buttons-row">
                 <button onClick={props.handleNumber} id="zero" value="0">0</button>
-                <button onClick={props.handleClick} id="decimal" value=".">.</button>
+                <button onClick={props.handleDecimal} id="decimal" value=".">.</button>
                 <button onClick={props.handleNegative} id="negative" value="negative">+/-</button>
                 <button onClick={props.handleClick} id="equals" value="=">=</button>
             </div>
