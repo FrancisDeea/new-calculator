@@ -1,6 +1,7 @@
 import './App.css';
 import React from 'react';
 import * as components from './components/export'
+import { calculator } from './components/handleResult'
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class App extends React.Component {
     this.handleSymbol = this.handleSymbol.bind(this);
     this.handleNegative = this.handleNegative.bind(this);
     this.handleDecimal = this.handleDecimal.bind(this);
+    this.handleResult = this.handleResult.bind(this);
   }
 
   // Add methods here
@@ -85,6 +87,16 @@ class App extends React.Component {
     }
   }
 
+  handleResult() {
+    const formula = this.state.formula;
+    if (!formula.includes("=")) {
+      this.setState(state => ({
+        formula: state.formula + state.input + "="
+      }))
+    }
+    calculator(formula)
+  }
+
   render() {
     return (
       <div id="calculator">
@@ -98,6 +110,7 @@ class App extends React.Component {
           handleSymbol={this.handleSymbol}
           handleNegative={this.handleNegative}
           handleDecimal={this.handleDecimal}
+          handleResult={this.handleResult}
         />
       </div>
     )
