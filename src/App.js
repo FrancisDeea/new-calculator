@@ -32,27 +32,7 @@ class App extends React.Component {
     const regex = /\+|x|\//;
     const value = e.target.value;
     const input = this.state.input;
-    if (this.state.input === 0 | this.state.input === "0") {
-      this.setState({
-        input: value
-      })
-    } else if (regex.test(input) || input === "-") {
-      this.setState(state => ({
-        formula: state.formula.concat(state.input),
-        input: value
-      }))
-    } else if (this.state.output !== null) {
-      this.setState(state => ({
-        output: null,
-        formula: [],
-        input: value
-      }))
-    }
-    else {
-      this.setState(state => ({
-        input: state.input + value
-      }))
-    }
+    
   }
 
   handleSymbol(e) {
@@ -60,57 +40,20 @@ class App extends React.Component {
     const formula = this.state.formula;
     const regex = /^\+$|^-$|^x$|^\/$/;
 
-    if (formula.length === 0) {
-      this.setState(state => ({
-        formula: state.formula.concat(state.input),
-        input: value
-      }))
-    } else if (this.state.input.match(regex)) {
-      this.setState({
-        input: value
-      })
-    } else if (this.state.output !== null) {
-      this.setState(state => ({
-        output: null,
-        formula: [state.input],
-        input: value
-      }))
-    } else {
-      this.setState(state => ({
-        formula: state.formula.concat(state.input),
-        input: value
-      }))
-    }
   }
 
   handleNegative() {
-    if (/[0-9]+/.test(this.state.input)) {
-      this.setState(state => ({
-        input: (-state.input).toString()
-      }))
-    }
+ 
   }
 
   handleDecimal() {
     const input = this.state.input;
-    if (!input.includes(".")) {
-      this.setState(state => ({
-        input: state.input + "."
-      }))
-    }
+ 
   }
 
   handleResult() {
     const formula = this.state.formula;
     const input = this.state.input;
-    if (!formula.includes("=")) {
-      const result = calculator(formula, input);
-      this.setState(state => ({
-        formula: state.formula.concat(state.input, "=", result),
-        input: result.toString(),
-        output: result
-      }))
-    }
 
   }
 
