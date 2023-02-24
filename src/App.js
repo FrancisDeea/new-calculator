@@ -23,7 +23,7 @@ class App extends React.Component {
   clear() {
     this.setState({
       formula: [],
-      input: "0",
+      input: 0,
       output: null
     })
   }
@@ -90,7 +90,12 @@ class App extends React.Component {
   handleResult() {
     const formula = this.state.formula;
     const input = this.state.input;
-    calculator(formula, input)
+    const result = calculator(formula, input);
+    this.setState(state => ({
+      formula: state.formula.concat(state.input, "=", result),
+      output: result
+    }))
+    console.log(result)
   }
 
   render() {
@@ -98,7 +103,7 @@ class App extends React.Component {
       <div id="calculator">
         <components.Display
           output={this.state.output ? this.state.output : this.state.input}
-          formula={this.state.formula}
+          formula={this.state.formula.join(" ")}
         />
         <components.Buttons
           handleClear={this.clear}
