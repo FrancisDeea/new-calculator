@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       formula: [],
-      input: 0,
+      input: "0",
       output: null
     }
     this.clear = this.clear.bind(this);
@@ -23,7 +23,7 @@ class App extends React.Component {
   clear() {
     this.setState({
       formula: [],
-      input: 0,
+      input: "0",
       output: null
     })
   }
@@ -41,7 +41,14 @@ class App extends React.Component {
         formula: state.formula.concat(state.input),
         input: value
       }))
-    } else {
+    } else if (this.state.output !== null) {
+      this.setState(state => ({
+        output: null,
+        formula: [],
+        input: value
+      }))
+    }
+    else {
       this.setState(state => ({
         input: state.input + value
       }))
@@ -62,6 +69,12 @@ class App extends React.Component {
       this.setState({
         input: value
       })
+    } else if (this.state.output !== null) {
+      this.setState(state => ({
+        output: null,
+        formula: [state.input],
+        input: value
+      }))
     } else {
       this.setState(state => ({
         formula: state.formula.concat(state.input),
@@ -90,19 +103,22 @@ class App extends React.Component {
   handleResult() {
     const formula = this.state.formula;
     const input = this.state.input;
-    const result = calculator(formula, input);
-    this.setState(state => ({
-      formula: state.formula.concat(state.input, "=", result),
-      output: result
-    }))
-    console.log(result)
+    if (!formula.includes("=")) {
+      const result = calculator(formula, input);
+      this.setState(state => ({
+        formula: state.formula.concat(state.input, "=", result),
+        input: result.toString(),
+        output: result
+      }))
+    }
+
   }
 
   render() {
     return (
       <div id="calculator">
         <components.Display
-          output={this.state.output ? this.state.output : this.state.input}
+          output={this.state.output !== null ? this.state.output : this.state.input}
           formula={this.state.formula.join(" ")}
         />
         <components.Buttons

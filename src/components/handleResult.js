@@ -3,6 +3,11 @@ export function calculator(formula, input) {
     let array = formula.concat(input);
     let result = 0;
 
+    // if array only includes 0
+    if (array.length === 1 && array[0] === 0) {
+        return result;
+    }
+
     // if array ends with operator, eliminate operator
     if (array[array.length - 1].match(operators)) {
         array.pop();
