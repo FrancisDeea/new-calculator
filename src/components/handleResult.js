@@ -1,3 +1,3 @@
-export function calculator(formula) {
+export function calculator(formula, input) {
     console.log(formula)
 }

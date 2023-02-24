@@ -7,7 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      formula: null,
+      formula: [],
       input: 0,
       output: null
     }
@@ -22,7 +22,7 @@ class App extends React.Component {
   // Add methods here
   clear() {
     this.setState({
-      formula: null,
+      formula: [],
       input: "0",
       output: null
     })
@@ -38,7 +38,7 @@ class App extends React.Component {
       })
     } else if (regex.test(input) || input === "-") {
       this.setState(state => ({
-        formula: state.formula + state.input,
+        formula: state.formula.concat(state.input),
         input: value
       }))
     } else {
@@ -53,9 +53,9 @@ class App extends React.Component {
     const formula = this.state.formula;
     const regex = /^\+$|^-$|^x$|^\/$/;
 
-    if (formula === null) {
+    if (formula.length === 0) {
       this.setState(state => ({
-        formula: state.input,
+        formula: state.formula.concat(state.input),
         input: value
       }))
     } else if (this.state.input.match(regex)) {
@@ -64,7 +64,7 @@ class App extends React.Component {
       })
     } else {
       this.setState(state => ({
-        formula: state.formula + state.input,
+        formula: state.formula.concat(state.input),
         input: value
       }))
     }
@@ -89,12 +89,8 @@ class App extends React.Component {
 
   handleResult() {
     const formula = this.state.formula;
-    if (!formula.includes("=")) {
-      this.setState(state => ({
-        formula: state.formula + state.input + "="
-      }))
-    }
-    calculator(formula)
+    const input = this.state.input;
+    calculator(formula, input)
   }
 
   render() {
