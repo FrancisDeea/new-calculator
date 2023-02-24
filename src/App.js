@@ -32,11 +32,22 @@ class App extends React.Component {
     const regex = /\+|x|\//;
     const value = e.target.value;
     const input = this.state.input;
+    // if input is 0, prevent to input more than one zero.
+    if (input === "0") {
+      this.setState({
+        input: value
+      });
     
+      // default else: this allows to concat multiple numbers.
+    } else {
+      this.setState(state => ({
+        input: state.input + value
+      }));
+    }
   }
 
   handleSymbol(e) {
-    const value = e.target.value;
+    const symbol = e.target.value;
     const formula = this.state.formula;
     const regex = /^\+$|^-$|^x$|^\/$/;
 
@@ -48,7 +59,12 @@ class App extends React.Component {
 
   handleDecimal() {
     const input = this.state.input;
- 
+    // if input doesn't include ".", you can add decimals
+    if (!input.includes(".")) {
+      this.setState(state => ({
+        input: state.input + "."
+      }))
+    }
   }
 
   handleResult() {
