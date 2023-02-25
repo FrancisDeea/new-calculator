@@ -84,7 +84,7 @@ class App extends React.Component {
   handleDecimal() {
     const input = this.state.input;
     // if input doesn't include ".", you can add decimals
-    if (!input.includes(".")) {
+    if (!input.includes(".") && input.match(/[0-9]+/)) {
       this.setState(state => ({
         input: state.input + "."
       }))
