@@ -94,7 +94,29 @@ class App extends React.Component {
   handleResult() {
     const formula = this.state.formula;
     const input = this.state.input;
-
+    const operators = /\+|\-|\/|\x/;
+    const result = calculator(formula, input);
+    
+    // if equals is pressed and formula ends with operator(s) => remove last symbol and add "=" and result
+    if (formula.length !== 0 && formula[formula.length - 1].match(operators) && input.match(operators)) {
+      if (formula[formula.length - 2].match(operators)) {
+        this.setState(state => ({
+          formula: [...state.formula.slice(0, -2), "=", result],
+          output: result
+        }))
+      } else {
+        this.setState(state => ({
+          formula: [...state.formula.slice(0, -1), "=", result],
+          output: result
+        }))
+      }
+      // default else: if equals is pressed and input is a number => add input to formula, add "=" and show result
+    } else {
+      this.setState(state => ({
+        formula: [...state.formula, state.input, "=", result],
+        output: result
+      }))
+    }
   }
 
   render() {

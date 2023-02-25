@@ -1,16 +1,23 @@
 export function calculator(formula, input) {
-    const operators = /^\+$|^-$|^x$|^\/$/;
-    let array = formula.concat(input);
+    const operators = /\+|\-|\/|\x/;
+    let array = [...formula];
     let result = 0;
+
+    // if input is not operator, concatenate formula and input
+    if (!input.match(operators)) {array.push(input)}
 
     // if array only includes 0
     if (array.length === 1 && array[0] === 0) {
         return result;
     }
 
-    // if array ends with operator, eliminate operator
+    // if array ends with operator, eliminate operator(s)
     if (array[array.length - 1].match(operators)) {
-        array.pop();
+        if (array[array.length - 2].match(operators)) {
+            array = array.slice(0, -2)
+        } else {
+            array = array.slice(0, -1)
+        }
     }
 
     // if array length is 1, returns item
@@ -19,9 +26,21 @@ export function calculator(formula, input) {
         return result;
     }
 
+     for (let item in array) {
+        if (array[item] === "-") {
+            let indexNegative = array.indexOf(array[item]);
+            if (array[indexNegative - 1].match(operators)) {
+                let numberNegative = array[indexNegative + 1];
+                array.splice(indexNegative, 2, -numberNegative)
+            }
+        }
+     }
+
     // parsing stringNumbers to numbers
     let parsed = array.map(item => {
-        if (!item.match(operators)) {
+        if (typeof item === "number") {
+            return item
+        } else if (!item.match(operators)) {
             return Number(item)
         } else {return item}
     });
