@@ -14,7 +14,6 @@ class App extends React.Component {
     this.clear = this.clear.bind(this);
     this.handleNumber = this.handleNumber.bind(this);
     this.handleSymbol = this.handleSymbol.bind(this);
-    this.handleNegative = this.handleNegative.bind(this);
     this.handleDecimal = this.handleDecimal.bind(this);
     this.handleResult = this.handleResult.bind(this);
   }
@@ -37,7 +36,6 @@ class App extends React.Component {
       this.setState({
         input: value
       });
-    
       // default else: this allows to concat multiple numbers.
     } else {
       this.setState(state => ({
@@ -49,12 +47,33 @@ class App extends React.Component {
   handleSymbol(e) {
     const symbol = e.target.value;
     const formula = this.state.formula;
-    const regex = /^\+$|^-$|^x$|^\/$/;
-
-  }
-
-  handleNegative() {
- 
+    const input = this.state.input;
+    const operators = /\+|\-|\/|\x/;
+    // if symbol is pressed when input is number => add number and symbol to formula and show symbol as input
+    if (input.match(/[0-9]+/)) {
+      this.setState(state => ({
+        formula: [...state.formula, state.input, symbol],
+        input: symbol
+      }));
+      // if "-" is pressed when there is already a symbol in formula => add another "-" symbol to handle negative numbers
+    } else if (symbol.match(/-/) && formula[formula.length - 2].match(/[0-9]+/)) {
+      this.setState(state => ({
+        formula: [...state.formula, symbol],
+        input: symbol
+      }));
+      // if there are 2 symbols in formula and another symbol is pressed => change the two previous symbol to the new one
+    } else if (formula[formula.length - 1] === "-" && formula[formula.length - 2].match(operators)) {
+      this.setState(state => ({
+        formula: state.formula.slice(0, -2).concat(symbol),
+        input: symbol
+      }));
+      // default else: if there is a symbol in formula and another symbol less "-" is pressed => change the old symbol to the new one
+    } else {
+      this.setState(state => ({
+        formula: state.formula.slice(0, -1).concat(symbol),
+        input: symbol
+      }))
+    }
   }
 
   handleDecimal() {
