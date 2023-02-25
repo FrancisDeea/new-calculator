@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   handleNumber(e) {
-    const regex = /\+|x|\//;
+    const operators = /\+|\-|\/|\x/;
     const value = e.target.value;
     const input = this.state.input;
     // if input is 0, prevent to input more than one zero.
@@ -36,6 +36,11 @@ class App extends React.Component {
       this.setState({
         input: value
       });
+      // if a number is pressed when input is a symbol => show number as input
+    } else if (input.match(operators)) {
+      this.setState(state => ({
+        input: value
+      }));
       // default else: this allows to concat multiple numbers.
     } else {
       this.setState(state => ({
