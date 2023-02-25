@@ -54,6 +54,16 @@ class App extends React.Component {
     const formula = this.state.formula;
     const input = this.state.input;
     const operators = /\+|\-|\/|\x/;
+
+    if (this.state.output !== null) {
+      this.setState(state => ({
+        output: null,
+        input: symbol,
+        formula: [state.output, symbol]
+      }))
+
+    } else
+
     // if symbol is pressed when input is number => add number and symbol to formula and show symbol as input
     if (input.match(/[0-9]+/)) {
       this.setState(state => ({
@@ -96,7 +106,7 @@ class App extends React.Component {
     const input = this.state.input;
     const operators = /\+|\-|\/|\x/;
     const result = calculator(formula, input);
-    
+
     // if equals is pressed and formula ends with operator(s) => remove last symbol and add "=" and result
     if (formula.length !== 0 && formula[formula.length - 1].match(operators) && input.match(operators)) {
       if (formula[formula.length - 2].match(operators)) {
@@ -118,6 +128,7 @@ class App extends React.Component {
       }))
     }
   }
+  
 
   render() {
     return (
