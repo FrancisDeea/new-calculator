@@ -46,7 +46,7 @@
 #calculator #buttons-container #buttons-row {
   width: 100%;
   display: flex;
-  flex-flow: row mowrap;
+  flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
   gap: 5px;
@@ -64,4 +64,5 @@
 #calculator #buttons-container #buttons-row #equals {
   background-color: aquamarine;
   color: black;
+  flex: 2.1;
 }/*# sourceMappingURL=App.css.map */
