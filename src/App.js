@@ -31,6 +31,14 @@ class App extends React.Component {
     const operators = /\+|\-|\/|\x/;
     const value = e.target.value;
     const input = this.state.input;
+
+    if (this.state.output !== null) {
+      this.setState(state => ({
+        output: null,
+        input: value,
+        formula: []
+      }));
+    } else 
     // if input is 0, prevent to input more than one zero.
     if (input === "0") {
       this.setState({
@@ -59,7 +67,7 @@ class App extends React.Component {
       this.setState(state => ({
         output: null,
         input: symbol,
-        formula: [state.output, symbol]
+        formula: [state.output.toString(), symbol]
       }))
 
     } else
@@ -101,11 +109,17 @@ class App extends React.Component {
     }
   }
 
-  handleResult() {
+  handleResult(e) {
     const formula = this.state.formula;
     const input = this.state.input;
     const operators = /\+|\-|\/|\x/;
-    const result = calculator(formula, input);
+    let result = undefined;
+
+    if (this.state.output !== null) {
+      return undefined
+    } else {
+      result = calculator(formula, input);
+    }
 
     // if equals is pressed and formula ends with operator(s) => remove last symbol and add "=" and result
     if (formula.length !== 0 && formula[formula.length - 1].match(operators) && input.match(operators)) {
@@ -135,6 +149,8 @@ class App extends React.Component {
       <div id="calculator">
         <components.Display
           output={this.state.output !== null ? this.state.output : this.state.input}
+        />
+        <components.Formula
           formula={this.state.formula.join(" ")}
         />
         <components.Buttons

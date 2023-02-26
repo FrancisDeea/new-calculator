@@ -28,6 +28,7 @@
     @include flex-column;
     justify-content: space-between;
     row-gap: 10px;
+    position: relative;
 
     #display {
         width: 100%;
@@ -44,13 +45,14 @@
             margin: 0 10px 5px 0;
             font-size: 1.5rem;
         }
+    }
 
-        #formula {
-            @extend #output;
-            top: 0;
-            font-size: 1.1rem;
-            margin: 5px 10px 0 0;
-        }
+    #formula {
+        color: white;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 1.1rem
     }
 
     #buttons-container {

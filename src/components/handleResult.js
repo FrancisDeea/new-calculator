@@ -25,13 +25,15 @@ export function calculator(formula, input) {
         result = Number(array[0]);
         return result;
     }
-
      for (let item in array) {
-        if (array[item] === "-") {
-            let indexNegative = array.indexOf(array[item]);
-            if (array[indexNegative - 1].match(operators)) {
-                let numberNegative = array[indexNegative + 1];
-                array.splice(indexNegative, 2, -numberNegative)
+        let checkIndex = array.indexOf(array[item])
+        if (array[checkIndex] === "-") {
+            if (array[checkIndex - 1].match(operators)) {
+                let numberNegative = array[checkIndex + 1];
+                array.splice(checkIndex, 2, -numberNegative)
+            } else if (array[checkIndex + 1].match(/\-/)) {
+                let numberNegative = array[checkIndex + 2];
+                array.splice((checkIndex + 1), 3, -numberNegative)
             }
         }
      }
@@ -44,7 +46,7 @@ export function calculator(formula, input) {
             return Number(item)
         } else {return item}
     });
-
+    console.log(parsed)
     // check if array includes multiplications and divisions
     while (parsed.includes("x") || parsed.includes("/")) {
         for (let item in parsed) {

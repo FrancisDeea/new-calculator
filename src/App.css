@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   row-gap: 10px;
+  position: relative;
 }
 #calculator #display {
   width: 100%;
@@ -18,7 +19,7 @@
   border: 1px solid rgb(108, 108, 108);
   position: relative;
 }
-#calculator #display #output, #calculator #display #formula {
+#calculator #display #output {
   display: block;
   color: white;
   position: absolute;
@@ -27,10 +28,12 @@
   margin: 0 10px 5px 0;
   font-size: 1.5rem;
 }
-#calculator #display #formula {
-  top: 0;
+#calculator #formula {
+  color: white;
+  position: absolute;
+  top: 15px;
+  right: 20px;
   font-size: 1.1rem;
-  margin: 5px 10px 0 0;
 }
 #calculator #buttons-container {
   width: 100%;
